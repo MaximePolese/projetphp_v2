@@ -26,9 +26,6 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Accueil</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                            aria-expanded="false">
@@ -41,6 +38,12 @@
                             <li><a class="dropdown-item" href="#">Sacs de couchage</a></li>
                             <li><a class="dropdown-item" href="#">Bâtons</a></li>
                         </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cart.php">Mon panier</a>
                     </li>
                 </ul>
                 <form class="d-flex" role="search">
