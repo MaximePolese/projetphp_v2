@@ -1,0 +1,34 @@
+:root {
+    --font-size: 18px;
+    --width-site: 1440px;
+}
+
+html {
+    font-size: var(--font-size);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: var(--width-site);
+    margin: 0 auto;
+}
+
+.productName{
+    max-width: 250px;
+}
+
+.productDescription {
+    max-width: 350px;
+}
+
+.productPic {
+    width: 25%;
+    height: 25%;
+}
+
+span {
+    font-weight: bold;
+}
