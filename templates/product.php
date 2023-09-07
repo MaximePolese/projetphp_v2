@@ -10,6 +10,11 @@
         <p>
             <span>Prix remisé : </span><?php echo formatPrice(discountedPrice($bag["price"], $bag["discount"])); ?>
         </p>
+        <p>
+            <button <?php if (!$bag['availability']): ?>disabled<?php endif; ?>>
+                Ajouter au panier
+            </button>
+        </p>
     </div>
 </article>
 
