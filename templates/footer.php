@@ -9,10 +9,9 @@
             <a class="px-2" href="#">Gestion des cookies</a>
         </div>
         <div class="d-flex align-self-center">
-            <a class="px-2" href="http://www.facebook.fr"><img src="icons/facebook.png" alt="facebook"
-                                                               width="30"></a>
-            <a href="http://www.instagram.fr"><img src="icons/instagram.png" alt="instagram" width="30"></a>
-            <a class="px-2" href="http://www.tiktok.fr"><img src="icons/tiktok.png" alt="tiktok" width="30"></a>
+            <a class="px-2" href="https://fr-fr.facebook.com/"><img src="../icons/facebook.png" alt="facebook" width="30"></a>
+            <a href="https://www.instagram.com/"><img src="../icons/instagram.png" alt="instagram" width="30"></a>
+            <a class="px-2" href="https://www.tiktok.com/"><img src="../icons/tiktok.png" alt="tiktok" width="30"></a>
         </div>
     </div>
 </footer>
