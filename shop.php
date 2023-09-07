@@ -1,6 +1,6 @@
 <?php
 include 'services/my-functions.php';
-//$products = ["Sacs de randonnée", "Tentes", "Matelas", "Sacs de couchage", "Bâtons"];
+
 $products = [
     "bags" => [
         "trail 30" => [
@@ -11,7 +11,7 @@ $products = [
             "weight" => 1120,
             "discount" => 0,
             "availability" => true,
-            "picture_url" => "https://dk0fkjygbn9vu.cloudfront.net/cache-buster-11693445103/deuter/mediaroom/product-images/backpacks/hiking-backpacks/159244/image-thumb__159244__deuter_lightbox-img/3440723-3253-Trail30_wave_ivy-D-00.png"
+            "picture_url" => "img/3440723-3253-Trail30_wave_ivy-D-00.png"
         ],
         "FUTURA 32" => [
             "name" => "Deuter FUTURA 32",
@@ -21,7 +21,7 @@ $products = [
             "weight" => 1440,
             "discount" => 20,
             "availability" => true,
-            "picture_url" => "https://dk0fkjygbn9vu.cloudfront.net/cache-buster-11691633690/deuter/mediaroom/product-images/backpacks/hiking-backpacks/145831/image-thumb__145831__deuter_lightbox-img/3400821-1358-Futura_32_reef-D-00.png"
+            "picture_url" => "img/3400821-1358-Futura_32_reef-D-00.png"
         ],
         "AC Lite 14 SL" => [
             "name" => "Deuter AC Lite 14 SL",
@@ -31,7 +31,7 @@ $products = [
             "weight" => 860,
             "discount" => 10,
             "availability" => true,
-            "picture_url" => "https://dk0fkjygbn9vu.cloudfront.net/cache-buster-11691635378/deuter/mediaroom/product-images/backpacks/hiking-backpacks/159177/image-thumb__159177__deuter_lightbox-img/3420521-1379-ACLite14SL_lake_ink-D-00.png"
+            "picture_url" => "img/3420521-1379-ACLite14SL_lake_ink-D-00.png"
         ],
         "Futura Pro 42 EL" => [
             "name" => "Deuter Futura Pro 42 EL",
@@ -41,10 +41,13 @@ $products = [
             "weight" => 1700,
             "discount" => 25,
             "availability" => true,
-            "picture_url" => "https://dk0fkjygbn9vu.cloudfront.net/cache-buster-11691634003/deuter/mediaroom/product-images/backpacks/hiking-backpacks/145856/image-thumb__145856__deuter_lightbox-img/3401421-7403-FuturaPro42EL_black_graphite-D-00.png"
+            "picture_url" => "img/3401421-7403-FuturaPro42EL_black_graphite-D-00.png"
         ],
     ],
     "tents" => [],
+    "mattress" => [],
+    "sleeping_bags" => [],
+    "sticks" => [],
 ];
 
 include 'templates/header.php';
@@ -52,7 +55,7 @@ include 'templates/header.php';
 ?>
 
     <section class="container">
-        <h1 class=" d-flex justify-content-center border border-warning  border-3 py-2 mt-2"><?php echo $products[0] ?></h1>
+        <h1 class=" d-flex justify-content-center border border-warning  border-3 py-2 mt-2">Sacs de randonnée</h1>
     </section>
 
 <?php
