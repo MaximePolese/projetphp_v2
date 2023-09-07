@@ -1,6 +1,5 @@
 <?php
 include 'services/my-functions.php';
-
 $products = [
     "bags" => [
         "trail 30" => [
@@ -49,11 +48,8 @@ $products = [
     "sleeping_bags" => [],
     "sticks" => [],
 ];
-
 include 'templates/header.php';
-
 ?>
-
     <section class="container">
         <h1 class="text-center border border-warning  border-3 py-2 mt-2">Sacs de randonnée</h1>
         <?php
@@ -62,5 +58,4 @@ include 'templates/header.php';
         }
         ?>
     </section>
-
 <?php include 'templates/footer.php'; ?>
