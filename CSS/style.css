@@ -32,3 +32,12 @@ html {
 span {
     font-weight: bold;
 }
+
+.quantity{
+    margin-bottom: 1rem;
+}
+
+#quantity {
+    width: 3.2rem;
+    margin-left: 1rem;
+}

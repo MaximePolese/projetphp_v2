@@ -40,7 +40,7 @@ $products = [
             "price" => 22500,
             "weight" => 1700,
             "discount" => 25,
-            "availability" => true,
+            "availability" => false,
             "picture_url" => "img/3401421-7403-FuturaPro42EL_black_graphite-D-00.png"
         ],
     ],
