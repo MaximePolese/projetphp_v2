@@ -1,6 +1,6 @@
 <?php
 include 'services/my-functions.php';
-include 'products.php';
+include 'catalog.php';
 include 'templates/header.php';
 ?>
     <section class="container">
