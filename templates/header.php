@@ -10,12 +10,13 @@
           integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="CSS/style.css">
     <title>Rando Shop</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 <header>
     <nav class="navbar navbar-expand-lg bg-info">
         <div class="container">
-            <a class="navbar-brand" href="#">Rando Shop</a>
+            <a class="navbar-brand" href="index.php">Rando Shop</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -23,16 +24,13 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Accueil</a>
-                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                            aria-expanded="false">
                             Produits
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Sacs</a></li>
+                            <li><a class="dropdown-item" href="shop.php">Sacs de randonnée</a></li>
                             <li><a class="dropdown-item" href="#">Tentes</a></li>
                             <li><a class="dropdown-item" href="#">Matelas</a></li>
                             <li><a class="dropdown-item" href="#">Sacs de couchage</a></li>
@@ -40,10 +38,10 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="cart.php">Mon panier</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="cart.php">Mon panier</a>
+                        <a class="nav-link" href="#">Contact</a>
                     </li>
                 </ul>
                 <form class="d-flex" role="search">

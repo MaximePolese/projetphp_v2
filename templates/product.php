@@ -5,23 +5,19 @@
     <div class="d-flex flex-column justify-content-end">
         <p><span>Poids : </span><?php echo $bag["weight"] ?> gr</p>
         <p><span>Prix HT : </span><?php echo formatPrice(priceExcludingVAT($bag["price"], $bag["vat"])); ?></p>
-        <p><span>Prix TTC : </span><?php echo formatPrice($bag["price"]); ?></p>
-        <p><span>Remise : </span><?php echo $bag["discount"] ?> %</p>
-        <p>
-            <span>Prix remisé : </span><?php echo formatPrice(discountedPrice($bag["price"], $bag["discount"])); ?>
+        <p<?php if ($bag["discount"] != 0): ?>><span>Remise : </span><?php echo $bag["discount"] ?> %<?php endif ?></p>
+        <p <?php if ($bag["discount"] > 0): ?> class="barre"<?php endif ?> >
+            <span>Prix TTC : </span><?php echo formatPrice($bag["price"]); ?></p>
+        <p class="discount" <?php if ($bag["discount"] != 0): ?>>
+            <span>Prix remisé : </span><?php echo formatPrice(discountedPrice($bag["price"], $bag["discount"])); ?><?php endif ?>
         </p>
         <form action="cart.php" method="get">
-            <label class="quantity" for="quantity">Quantité :</label><input type="number" id="quantity" min="1" max="100" value="1">
+            <label class="quantity" for="quantity">Quantité :</label><input type="number" id="quantity" min="1"
+                                                                            max="100" value="1">
         </form>
         <p>
-            <button <?php if (!$bag['availability']): ?>disabled<?php endif; ?>>
-                Ajouter au panier
-            </button>
+            <button class="bg-info"<?php if (!$bag['availability']): ?>disabled<?php endif; ?>>Ajouter au panier</button>
         </p>
     </div>
 </article>
-
-
-
-
 

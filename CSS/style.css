@@ -16,7 +16,7 @@ html {
     margin: 0 auto;
 }
 
-.productName{
+.productName {
     max-width: 250px;
 }
 
@@ -33,11 +33,29 @@ span {
     font-weight: bold;
 }
 
-.quantity{
+.quantity {
     margin-bottom: 1rem;
 }
 
 #quantity {
     width: 3.2rem;
     margin-left: 1rem;
+}
+
+.discount {
+    color: limegreen;
+}
+
+.discount > span {
+    color: black;
+}
+
+.barre {
+    text-decoration: line-through;
+    color: red;
+}
+
+button {
+    border-radius: 15px;
+    padding-inline: 20px;
 }
