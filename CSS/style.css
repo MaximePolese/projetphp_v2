@@ -55,7 +55,8 @@ span {
     color: red;
 }
 
-button {
+.add {
     border-radius: 15px;
     padding-inline: 20px;
+    margin-bottom: 1rem;
 }
