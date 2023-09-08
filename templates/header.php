@@ -30,7 +30,7 @@
                             Produits
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="shop.php">Sacs de randonnée</a></li>
+                            <li><a class="dropdown-item" href="bags.php">Sacs de randonnée</a></li>
                             <li><a class="dropdown-item" href="#">Tentes</a></li>
                             <li><a class="dropdown-item" href="#">Matelas</a></li>
                             <li><a class="dropdown-item" href="#">Sacs de couchage</a></li>
