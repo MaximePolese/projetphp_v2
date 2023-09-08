@@ -30,8 +30,24 @@ include 'templates/header.php';
                 <td class="text-end" colspan="5">Total</td>
                 <td>145€</td>
             </tr>
+            <tr>
+                <th class="text-end" colspan="4">Choisir le transporteur</th>
+                <th colspan="2"></th>
+            </tr>
+            <tr>
+                <th colspan="2"></th>
+                <th class="text-end" colspan="3">
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Colissimo</option>
+                        <option value="1">Fedex</option>
+                        <option value="2">UPS</option>
+                    </select>
+                </th>
+                <th colspan="1"></th>
+            </tr>
             </tbody>
         </table>
+
         <div class="d-flex justify-content-end">
             <button type="submit" class="btn btn-success m-3">COMMANDER</button>
         </div>
