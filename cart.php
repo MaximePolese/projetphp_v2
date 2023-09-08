@@ -5,46 +5,37 @@ include 'templates/header.php';
 ?>
 <section class="container">
     <h1 class="text-center border border-warning  border-3 py-2 mt-2">Mon panier</h1>
-    <div>
-        <table>
+    <div class="border border-warning  border-3 mb-2">
+        <table class="table">
             <thead>
             <tr>
-                <th>Produit</th>
-                <th>Prix HT</th>
-                <th>Prix TTC</th>
-                <th>Remise</th>
-                <th>Quantité</th>
-                <th>Total</th>
+                <th scope="col">Produit</th>
+                <th scope="col">Prix HT</th>
+                <th scope="col">Prix TTC</th>
+                <th scope="col">Remise</th>
+                <th scope="col">Quantité</th>
+                <th scope="col">Total</th>
             </tr>
             </thead>
-
             <tbody>
             <tr>
-                <td><?php echo $bag["name"] ?></td>
-                <td><?php echo formatPrice(priceExcludingVAT($bag["price"], $bag["vat"])); ?></td>
-                <td><?php echo formatPrice($bag["price"]); ?></td>
-                <td><?php echo $bag["discount"] ?></td>
-                <td><?php if (isset($_GET['submit'])) {
-                        echo $_GET['quantity'];
-                    } ?></td>
-                <td><?php echo formatPrice(discountedPrice($bag["price"], $bag["discount"])); ?></td>
+                <td>Deuter trail 30</td>
+                <td>120,83 €</td>
+                <td>145 €</td>
+                <td>0%</td>
+                <td><input type="number" id="quantity" min="0" max="100" value="1"></td>
+                <td>145 €</td>
+            </tr>
+            <tr>
+                <td class="text-end" colspan="5">Total</td>
+                <td>145€</td>
             </tr>
             </tbody>
         </table>
+        <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-success m-3">COMMANDER</button>
+        </div>
     </div>
 </section>
-
 <?php include 'templates/footer.php'; ?>
 
-
-<p><span>Prix HT : </span>
-    <?php echo formatPrice(priceExcludingVAT($bag["price"], $bag["vat"])); ?></p>
-<p<?php if ($bag["discount"] != 0): ?>><span>Remise : </span>
-    <?php echo $bag["discount"] ?> %<?php endif ?>
-</p>
-<p <?php if ($bag["discount"] > 0): ?> class="barre"<?php endif ?> >
-    <span>Prix TTC : </span><?php echo formatPrice($bag["price"]); ?></p>
-<p class="discount" <?php if ($bag["discount"] != 0): ?>>
-    <span>Prix remisé : </span>
-    <?php echo formatPrice(discountedPrice($bag["price"], $bag["discount"])); ?><?php endif ?>
-</p>

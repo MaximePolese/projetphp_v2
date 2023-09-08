@@ -5,15 +5,22 @@
     <div class="d-flex flex-column justify-content-end">
         <p><span>Poids : </span><?php echo $product["weight"] ?> gr</p>
         <p><span>Prix HT : </span><?php echo formatPrice(priceExcludingVAT($product["price"], $product["vat"])); ?></p>
-        <p<?php if ($product["discount"] != 0): ?>><span>Remise : </span><?php echo $product["discount"] ?> %<?php endif ?></p>
+        <p<?php if ($product["discount"] != 0): ?>><span>Remise : </span><?php echo $product["discount"] ?>
+            %<?php endif ?></p>
         <p <?php if ($product["discount"] > 0): ?> class="barre"<?php endif ?> >
             <span>Prix TTC : </span><?php echo formatPrice($product["price"]); ?></p>
-        <p class="discount" <?php if ($product["discount"] != 0): ?>>
+        <p id="discountPrice" class="discount" <?php if ($product["discount"] != 0): ?>>
             <span>Prix remisé : </span><?php echo formatPrice(discountedPrice($product["price"], $product["discount"])); ?><?php endif ?>
         </p>
-        <form action="cart.php" method="get">
+        <form action="bags.php" method="get">
             <label class="quantity" for="quantity">Quantité :</label><input name="quantity" type="number" id="quantity" min="1" max="100" value="1"><br>
-            <button name="submit" type="submit" class="bg-info add" <?php if (!$product['availability']): ?>disabled<?php endif; ?>>Ajouter au panier</button>
+            <button name="submit" type="submit" class="bg-info add"
+                    <?php if ($product['availability']) {
+                        if (isset($_GET['submit'])) {
+                            addCart($product, $_GET['quantity']);
+                        }
+                    } else { ?>disabled <?php } ?> >Ajouter au panier
+            </button>
         </form>
     </div>
 </article>

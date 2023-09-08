@@ -8,7 +8,9 @@ include 'templates/header.php';
         <?php
         foreach ($products["bags"] as $product) {
             include "templates/product.php";
+//            $_GET['quantity'] = 0;
         }
         ?>
     </section>
+<?php var_dump ($cart) ?>
 <?php include 'templates/footer.php'; ?>
