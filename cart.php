@@ -5,7 +5,9 @@ include 'templates/header.php';
 if (isset($_GET['submit'])) {
     fillCart($products['bags'][$_GET['nameProduct']], $_GET['quantity']);
 }
-//var_dump($cart)
+if (isset($_GET['deleteProduct'])) {
+    unset($cart[$_GET['nameProduct']]);
+}
 ?>
 <section class="container">
     <h1 class="text-center border border-warning  border-3 py-2 mt-2">Mon panier</h1>
@@ -19,6 +21,7 @@ if (isset($_GET['submit'])) {
                 <th scope="col">Remise</th>
                 <th scope="col">Quantité</th>
                 <th scope="col">Total</th>
+                <th scope="col">Supprimer l'article</th>
             </tr>
             </thead>
             <tbody>
@@ -32,6 +35,15 @@ if (isset($_GET['submit'])) {
                                value="<?php echo $newItem['quantity'] ?>">
                     </td>
                     <td><?php echo formatPrice($newItem['price'] * $newItem['quantity']); ?></td>
+                    <td>
+                        <form action="cart.php" method="get">
+                            <!--                            <input type="hidden" name="quantity" value="-->
+                            <?php //echo $_GET['quantity'] ?><!--">-->
+                            <!--                            <input type="hidden" name="nameProduct" value="-->
+                            <?php //echo $_GET['nameProduct'] ?><!--">-->
+                            <button name="deleteProduct" type="submit" class="btn btn-danger m-3">Supprimer</button>
+                        </form>
+                    </td>
                 </tr>
             <?php } ?>
             <tr>
@@ -61,7 +73,7 @@ if (isset($_GET['submit'])) {
                                     value="3">UPS
                             </option>
                         </select>
-                        <input name="quantity" type="hidden" value="<?php echo $_GET['quantity'] ?>">
+                        <input type="hidden" name="quantity" value="<?php echo $_GET['quantity'] ?>">
                         <input type="hidden" name="nameProduct" value="<?php echo $_GET['nameProduct'] ?>">
                         <button name="submit" type="submit" class="btn btn-success m-3">Valider</button>
                     </form>
