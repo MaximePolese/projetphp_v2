@@ -43,27 +43,41 @@ if (isset($_GET['submit'])) {
                 <td class="bold"><?php echo formatPrice(totalTTC($cart)); ?></td>
             </tr>
             <tr>
-                <td class="text-end" colspan="4">Choisir le transporteur</td>
-                <td colspan="2"></td>
+                <td colspan="4"></td>
+                <td colspan="2">Choisir le transporteur</td>
             </tr>
             <tr>
-                <td colspan="2"></td>
-                <td class="text-end" colspan="3">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Colissimo</option>
-                        <option value="1">Fedex</option>
-                        <option value="2">UPS</option>
-                    </select>
+                <td colspan="4"></td>
+                <td class="text-end" colspan="2">
+                    <form action="cart.php" method="get">
+                        <select name="shipment" class="form-select" aria-label="Default select example">
+                            <option <?php if (isset($_GET['shipment']) && $_GET['shipment'] == 1) echo 'selected'; ?>
+                                    value="1">Colissimo
+                            </option>
+                            <option <?php if (isset($_GET['shipment']) && $_GET['shipment'] == 2) echo 'selected'; ?>
+                                    value="2">Fedex
+                            </option>
+                            <option <?php if (isset($_GET['shipment']) && $_GET['shipment'] == 3) echo 'selected'; ?>
+                                    value="3">UPS
+                            </option>
+                        </select>
+                        <input name="quantity" type="hidden" value="<?php echo $_GET['quantity'] ?>">
+                        <input type="hidden" name="nameProduct" value="<?php echo $_GET['nameProduct'] ?>">
+                        <button name="submit" type="submit" class="btn btn-success m-3">Valider</button>
+                    </form>
                 </td>
-                <td colspan="1"></td>
             </tr>
             <tr>
                 <td class="text-end" colspan="5">Frais de livraison :</td>
-                <td><?php echo formatPrice(calcShipment1()); ?></td>
+                <td><?php if (chooseShipment() == null) {
+                        echo 'Valider le transporteur';
+                    } else {
+                        echo formatPrice(chooseShipment());
+                    } ?></td>
             </tr>
             <tr>
                 <td class="text-end bold" colspan="5">Total TTC avec livraison :</td>
-                <td class="bold"><?php echo formatPrice(totalTTC($cart) + calcShipment1()); ?></td>
+                <td class="bold"><?php echo formatPrice(totalTTC($cart) + chooseShipment()); ?></td>
             </tr>
             </tbody>
         </table>

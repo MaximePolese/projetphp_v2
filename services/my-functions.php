@@ -30,7 +30,7 @@ function totalHT(array $products): float
 {
     $totalHT = 0;
     foreach ($products as $product) {
-        $totalHT = $totalHT+ ((priceExcludingVAT($product['price'], $product['vat'])) * $product['quantity']);
+        $totalHT = $totalHT + ((priceExcludingVAT($product['price'], $product['vat'])) * $product['quantity']);
     }
     return $totalHT;
 }
@@ -59,7 +59,7 @@ function calcShipment1(): float
     if (totalWeight($cart) < 500) {
         return 500;
     } elseif (totalWeight($cart) < 2000) {
-        return totalTTC($cart)* 0.1;
+        return totalTTC($cart) * 0.1;
     } else {
         return 0;
     }
@@ -71,7 +71,7 @@ function calcShipment2(): float
     if (totalWeight($cart) < 500) {
         return 1000;
     } elseif (totalWeight($cart) < 3000) {
-        return totalTTC($cart)* 0.05;
+        return totalTTC($cart) * 0.05;
     } else {
         return 0;
     }
@@ -83,8 +83,25 @@ function calcShipment3(): float
     if (totalWeight($cart) < 100) {
         return 750;
     } elseif (totalWeight($cart) < 4000) {
-        return totalTTC($cart)* 0.07;
+        return totalTTC($cart) * 0.07;
     } else {
         return 0;
     }
+}
+
+function chooseShipment(): float|null
+{
+    if (isset($_GET['shipment'])) {
+        if ($_GET['shipment'] == 1) {
+            return calcShipment1();
+        }
+        if ($_GET['shipment'] == 2) {
+            return calcShipment2();
+        }
+        if ($_GET['shipment'] == 3) {
+            return calcShipment3();
+        }
+
+    }
+    return null;
 }
