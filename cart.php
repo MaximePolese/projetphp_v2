@@ -5,7 +5,7 @@ include 'templates/header.php';
 if (isset($_GET['submit'])) {
     fillCart($products['bags'][$_GET['nameProduct']], $_GET['quantity']);
 }
-var_dump($cart)
+//var_dump($cart)
 ?>
 <section class="container">
     <h1 class="text-center border border-warning  border-3 py-2 mt-2">Mon panier</h1>
@@ -28,37 +28,42 @@ var_dump($cart)
                     <td><?php echo formatPrice(priceExcludingVAT($newItem['price'], $newItem['vat'])); ?></td>
                     <td><?php echo formatPrice($newItem['price']); ?></td>
                     <td><?php echo $newItem['discount'] ?> %</td>
-                    <td><input type="number" id="quantity" min="0" max="100" value="<?php echo $newItem['quantity'] ?>">
+                    <td><input type="number" name="newQuantity" id="quantity" min="0" max="100"
+                               value="<?php echo $newItem['quantity'] ?>">
                     </td>
                     <td><?php echo formatPrice($newItem['price'] * $newItem['quantity']); ?></td>
                 </tr>
             <?php } ?>
             <tr>
-                <td class="text-end bold" colspan="5">Total HT</td>
-                <?php foreach ($cart as $newItem) { ?>
-                    <td class="bold"><?php echo formatPrice((priceExcludingVAT($newItem['price'], $newItem['vat'])) * $newItem['quantity']); ?></td>
-                <?php } ?>
+                <td class="text-end bold" colspan="5">Total HT :</td>
+                <td class="bold"><?php echo formatPrice(totalHT($cart)); ?></td>
             </tr>
             <tr>
-                <td class="text-end bold" colspan="5">Total TTC</td>
-                <?php foreach ($cart as $newItem) { ?>
-                    <td class="bold"><?php echo formatPrice($newItem['price'] * $newItem['quantity']); ?></td>
-                <?php } ?>
+                <td class="text-end bold" colspan="5">Total TTC :</td>
+                <td class="bold"><?php echo formatPrice(totalTTC($cart)); ?></td>
             </tr>
             <tr>
-                <th class="text-end" colspan="4">Choisir le transporteur</th>
-                <th colspan="2"></th>
+                <td class="text-end" colspan="4">Choisir le transporteur</td>
+                <td colspan="2"></td>
             </tr>
             <tr>
-                <th colspan="2"></th>
-                <th class="text-end" colspan="3">
+                <td colspan="2"></td>
+                <td class="text-end" colspan="3">
                     <select class="form-select" aria-label="Default select example">
                         <option selected>Colissimo</option>
                         <option value="1">Fedex</option>
                         <option value="2">UPS</option>
                     </select>
-                </th>
-                <th colspan="1"></th>
+                </td>
+                <td colspan="1"></td>
+            </tr>
+            <tr>
+                <td class="text-end" colspan="5">Frais de livraison :</td>
+                <td><?php echo formatPrice(calcShipment1()); ?></td>
+            </tr>
+            <tr>
+                <td class="text-end bold" colspan="5">Total TTC avec livraison :</td>
+                <td class="bold"><?php echo formatPrice(totalTTC($cart) + calcShipment1()); ?></td>
             </tr>
             </tbody>
         </table>
