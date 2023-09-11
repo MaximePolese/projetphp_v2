@@ -17,7 +17,7 @@ function discountedPrice(float $price, float $discount): float
 
 $cart = [];
 
-function addCart(array $product, int $nb): void
+function fillCart(array $product, int $nb): void
 {
     global $cart;
     $cart[] = $product;

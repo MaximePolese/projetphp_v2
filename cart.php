@@ -2,6 +2,10 @@
 include 'services/my-functions.php';
 include 'catalog.php';
 include 'templates/header.php';
+if (isset($_GET['submit'])) {
+    fillCart($products['bags'][$_GET['nameProduct']], $_GET['quantity']);
+}
+var_dump($cart)
 ?>
 <section class="container">
     <h1 class="text-center border border-warning  border-3 py-2 mt-2">Mon panier</h1>
@@ -18,17 +22,28 @@ include 'templates/header.php';
             </tr>
             </thead>
             <tbody>
+            <?php foreach ($cart as $newItem) { ?>
+                <tr>
+                    <td><?php echo $newItem['name']; ?></td>
+                    <td><?php echo formatPrice(priceExcludingVAT($newItem['price'], $newItem['vat'])); ?></td>
+                    <td><?php echo formatPrice($newItem['price']); ?></td>
+                    <td><?php echo $newItem['discount'] ?> %</td>
+                    <td><input type="number" id="quantity" min="0" max="100" value="<?php echo $newItem['quantity'] ?>">
+                    </td>
+                    <td><?php echo formatPrice($newItem['price'] * $newItem['quantity']); ?></td>
+                </tr>
+            <?php } ?>
             <tr>
-                <td>Deuter trail 30</td>
-                <td>120,83 €</td>
-                <td>145 €</td>
-                <td>0%</td>
-                <td><input type="number" id="quantity" min="0" max="100" value="1"></td>
-                <td>145 €</td>
+                <td class="text-end bold" colspan="5">Total HT</td>
+                <?php foreach ($cart as $newItem) { ?>
+                    <td class="bold"><?php echo formatPrice((priceExcludingVAT($newItem['price'], $newItem['vat'])) * $newItem['quantity']); ?></td>
+                <?php } ?>
             </tr>
             <tr>
-                <td class="text-end" colspan="5">Total</td>
-                <td>145€</td>
+                <td class="text-end bold" colspan="5">Total TTC</td>
+                <?php foreach ($cart as $newItem) { ?>
+                    <td class="bold"><?php echo formatPrice($newItem['price'] * $newItem['quantity']); ?></td>
+                <?php } ?>
             </tr>
             <tr>
                 <th class="text-end" colspan="4">Choisir le transporteur</th>
