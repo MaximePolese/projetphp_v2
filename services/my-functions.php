@@ -16,26 +16,20 @@ function discountedPrice(float $price, float $discount): float
 }
 
 $cart = $_SESSION['cartSave'];
-//$cart = [];
 
 function fillCart(array $product, int $nb): void
 {
     global $cart;
     $product['quantity'] = $nb;
-    $cart[] = $product;
+    $cart[$product['name']] = $product;
     $_SESSION['cartSave'] = $cart;
 }
-
-function emptyCart() {
-
-}
-
 
 function totalHT(array $products): float
 {
     $totalHT = 0;
     foreach ($products as $product) {
-        $totalHT = $totalHT + ((priceExcludingVAT($product['price'], $product['vat'])) * $product['quantity']);
+        $totalHT = $totalHT + discountedPrice((priceExcludingVAT($product['price'], $product['vat'])) * $product['quantity'], $product['discount']);
     }
     return $totalHT;
 }
@@ -44,7 +38,7 @@ function totalTTC(array $products): float
 {
     $totalTTC = 0;
     foreach ($products as $product) {
-        $totalTTC = $totalTTC + ($product['price'] * $product['quantity']);
+        $totalTTC = $totalTTC + discountedPrice($product['price'] * $product['quantity'], $product['discount']);
     }
     return $totalTTC;
 }
