@@ -31,16 +31,12 @@ if (isset($_GET['deleteProduct'])) {
                     <td><?php echo formatPrice(priceExcludingVAT($newItem['price'], $newItem['vat'])); ?></td>
                     <td><?php echo formatPrice($newItem['price']); ?></td>
                     <td><?php echo $newItem['discount'] ?> %</td>
-                    <td><input type="number" name="newQuantity" id="quantity" min="0" max="100"
-                               value="<?php echo $newItem['quantity'] ?>">
-                    </td>
+                    <td><input type="number" name="newQuantity" id="quantity" min="1" max="100" value="<?php echo $newItem['quantity'] ?>"></td>
                     <td><?php echo formatPrice($newItem['price'] * $newItem['quantity']); ?></td>
                     <td>
                         <form action="cart.php" method="get">
-                            <!--                            <input type="hidden" name="quantity" value="-->
-                            <?php //echo $_GET['quantity'] ?><!--">-->
-                            <!--                            <input type="hidden" name="nameProduct" value="-->
-                            <?php //echo $_GET['nameProduct'] ?><!--">-->
+                            <input type="hidden" name="nameProduct" value="
+                            <?php echo $_GET['nameProduct'] ?>">
                             <button name="deleteProduct" type="submit" class="btn btn-danger m-3">Supprimer</button>
                         </form>
                     </td>
@@ -54,6 +50,7 @@ if (isset($_GET['deleteProduct'])) {
                 <td class="text-end bold" colspan="5">Total TTC :</td>
                 <td class="bold"><?php echo formatPrice(totalTTC($cart)); ?></td>
             </tr>
+            <?php if (count($cart) > 0) {?>
             <tr>
                 <td colspan="4"></td>
                 <td colspan="2">Choisir le transporteur</td>
@@ -63,15 +60,9 @@ if (isset($_GET['deleteProduct'])) {
                 <td class="text-end" colspan="2">
                     <form action="cart.php" method="get">
                         <select name="shipment" class="form-select" aria-label="Default select example">
-                            <option <?php if (isset($_GET['shipment']) && $_GET['shipment'] == 1) echo 'selected'; ?>
-                                    value="1">Colissimo
-                            </option>
-                            <option <?php if (isset($_GET['shipment']) && $_GET['shipment'] == 2) echo 'selected'; ?>
-                                    value="2">Fedex
-                            </option>
-                            <option <?php if (isset($_GET['shipment']) && $_GET['shipment'] == 3) echo 'selected'; ?>
-                                    value="3">UPS
-                            </option>
+                            <option <?php if (isset($_GET['shipment']) && $_GET['shipment'] == 1) echo 'selected'; ?>value="1">Colissimo</option>
+                            <option <?php if (isset($_GET['shipment']) && $_GET['shipment'] == 2) echo 'selected'; ?>value="2">Fedex</option>
+                            <option <?php if (isset($_GET['shipment']) && $_GET['shipment'] == 3) echo 'selected'; ?>value="3">UPS</option>
                         </select>
                         <input type="hidden" name="quantity" value="<?php echo $_GET['quantity'] ?>">
                         <input type="hidden" name="nameProduct" value="<?php echo $_GET['nameProduct'] ?>">
@@ -81,7 +72,7 @@ if (isset($_GET['deleteProduct'])) {
             </tr>
             <tr>
                 <td class="text-end" colspan="5">Frais de livraison :</td>
-                <td><?php if (chooseShipment() == null) {
+                <td><?php if (chooseShipment() === null) {
                         echo 'Valider le transporteur';
                     } else {
                         echo formatPrice(chooseShipment());
@@ -91,11 +82,12 @@ if (isset($_GET['deleteProduct'])) {
                 <td class="text-end bold" colspan="5">Total TTC avec livraison :</td>
                 <td class="bold"><?php echo formatPrice(totalTTC($cart) + chooseShipment()); ?></td>
             </tr>
+            <?php } ?>
             </tbody>
         </table>
-
         <div class="d-flex justify-content-end">
-            <button type="submit" class="btn btn-success m-3">COMMANDER</button>
+            <button type="submit" class="btn btn-success m-3"
+                    <?php if (!count($cart) > 0): ?>disabled <?php endif ?>>COMMANDER</button>
         </div>
     </div>
 </section>
