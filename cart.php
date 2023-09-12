@@ -1,11 +1,15 @@
 <?php
+include 'templates/header.php';
 include 'services/my-functions.php';
 include 'catalog.php';
-include 'templates/header.php';
 if (isset($_GET['submit'])) {
     fillCart($products['bags'][$_GET['nameProduct']], $_GET['quantity']);
 }
 if (isset($_GET['deleteProduct'])) {
+    unset($cart[$_GET['nameProduct']]);
+    unset($_SESSION['cartSave'][$_GET['nameProduct']]);
+}
+if (isset($_GET['deleteAll'])) {
     unset($cart[$_GET['nameProduct']]);
 }
 ?>
@@ -35,8 +39,7 @@ if (isset($_GET['deleteProduct'])) {
                     <td><?php echo formatPrice($newItem['price'] * $newItem['quantity']); ?></td>
                     <td>
                         <form action="cart.php" method="get">
-                            <input type="hidden" name="nameProduct" value="
-                            <?php echo $_GET['nameProduct'] ?>">
+                            <input type="hidden" name="nameProduct" value="<?php echo $_GET['nameProduct'] ?>">
                             <button name="deleteProduct" type="submit" class="btn btn-danger m-3">Supprimer</button>
                         </form>
                     </td>
@@ -86,8 +89,11 @@ if (isset($_GET['deleteProduct'])) {
             </tbody>
         </table>
         <div class="d-flex justify-content-end">
-            <button type="submit" class="btn btn-success m-3"
-                    <?php if (!count($cart) > 0): ?>disabled <?php endif ?>>COMMANDER</button>
+            <form action="cart.php" method="get">
+                <input type="hidden" name="nameProduct" value="<?php echo $_GET['nameProduct'] ?>">
+                <button name="deleteAll" type="submit" class="btn btn-danger m-3">Supprimer le panier</button>
+            </form>
+            <button type="submit" class="btn btn-success m-3" <?php if (!count($cart) > 0): ?>disabled <?php endif ?>>COMMANDER</button>
         </div>
     </div>
 </section>

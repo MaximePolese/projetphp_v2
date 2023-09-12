@@ -15,16 +15,21 @@ function discountedPrice(float $price, float $discount): float
     return $price - ($price * $discount / 100);
 }
 
-//$cart = [$_SESSION['cartSave']];
-$cart = [];
+$cart = $_SESSION['cartSave'];
+//$cart = [];
 
 function fillCart(array $product, int $nb): void
 {
     global $cart;
     $product['quantity'] = $nb;
     $cart[] = $product;
-//    $_SESSION['cartSave'] = $cart;
+    $_SESSION['cartSave'] = $cart;
 }
+
+function emptyCart() {
+
+}
+
 
 function totalHT(array $products): float
 {
