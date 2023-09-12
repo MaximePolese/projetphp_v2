@@ -17,7 +17,8 @@ html {
 }
 
 .productName {
-    max-width: 250px;
+    min-width: 300px;
+    max-width: 300px;
 }
 
 .productDescription {

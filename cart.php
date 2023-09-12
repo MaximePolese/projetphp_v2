@@ -44,8 +44,7 @@ if (isset($_GET['deleteAll'])) {
                     <td><?php echo formatPrice(priceExcludingVAT($newItem['price'], $newItem['vat'])); ?></td>
                     <td><?php echo formatPrice($newItem['price']); ?></td>
                     <td><?php echo $newItem['discount'] ?> %</td>
-                    <td><input type="number" name="newQuantity" id="quantity" min="1" max="100"
-                               value="<?php echo $newItem['quantity'] ?>"></td>
+                    <td><input type="number" name="newQuantity" id="quantity" min="1" max="100" value="<?php echo $newItem['quantity'] ?>"></td>
                     <td><?php echo formatPrice(discountedPrice($newItem['price'] * $newItem['quantity'], $newItem['discount'])); ?></td>
                     <td>
                         <form action="cart.php" method="get">
