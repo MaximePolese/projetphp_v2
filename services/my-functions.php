@@ -25,29 +25,29 @@ function fillCart(array $product, int $nb): void
     $_SESSION['cartSave'] = $cart;
 }
 
-function totalHT(array $products): float
+function totalHT(array $productsPriceHT): float
 {
     $totalHT = 0;
-    foreach ($products as $product) {
-        $totalHT = $totalHT + discountedPrice((priceExcludingVAT($product['price'], $product['vat'])) * $product['quantity'], $product['discount']);
+    foreach ($productsPriceHT as $productPriceHT) {
+        $totalHT = $totalHT + discountedPrice((priceExcludingVAT($productPriceHT['price'], $productPriceHT['vat'])) * $productPriceHT['quantity'], $productPriceHT['discount']);
     }
     return $totalHT;
 }
 
-function totalTTC(array $products): float
+function totalTTC(array $productsPriceTTC): float
 {
     $totalTTC = 0;
-    foreach ($products as $product) {
-        $totalTTC = $totalTTC + discountedPrice($product['price'] * $product['quantity'], $product['discount']);
+    foreach ($productsPriceTTC as $productPriceTTC) {
+        $totalTTC = $totalTTC + discountedPrice($productPriceTTC['price'] * $productPriceTTC['quantity'], $productPriceTTC['discount']);
     }
     return $totalTTC;
 }
 
-function totalWeight(array $products): float
+function totalWeight(array $productsWeight): float
 {
     $totalWeight = 0;
-    foreach ($products as $product) {
-        $totalWeight = $totalWeight + ($product['weight'] * $product['quantity']);
+    foreach ($productsWeight as $productWeight) {
+        $totalWeight = $totalWeight + ($productWeight['weight'] * $productWeight['quantity']);
     }
     return $totalWeight;
 }

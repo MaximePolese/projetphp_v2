@@ -1,8 +1,8 @@
 <?php
 $products = [
     "bags" => [
-        "trail 30" => [
-            "name" => "trail 30",
+        "Trail 30" => [
+            "name" => "Trail 30",
             "description" => "La surface de contact réduite et les grands canaux d’aération du système dorsal Airstripes de deuter, combinés aux bretelles et aux stabilisateurs de hanche perforés (avec poches), assurent un flux d’air maximal et une répartition uniforme du poids pour un maintien parfait et sécurisé sur tous les terrains. La construction plate du rabat offre un bon dégagement pour la tête, même avec un casque. Les boucles sur les bretelles permettent de garder les mousquetons de via ferrata à portée de main. Et grâce à une grande ouverture frontale zippée et à des poches latérales, les équipements et le matériel sont toujours faciles d’accès. ",
             "vat" => 20,
             "price" => 14500,
