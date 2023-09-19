@@ -5,9 +5,9 @@ function formatPrice(float $price): string
     return number_format($price / 100, 2, ",", " ") . ' €';
 }
 
-function priceExcludingVAT(float $price, float $vat): float
+function priceExcludingVAT(float $price): float
 {
-    return (100 * $price) / (100 + $vat);
+    return (100 * $price) / (100 + 20);
 }
 
 function discountedPrice(float $price, float $discount): float
@@ -29,7 +29,7 @@ function totalHT(array $productsPriceHT): float
 {
     $totalHT = 0;
     foreach ($productsPriceHT as $productPriceHT) {
-        $totalHT = $totalHT + discountedPrice((priceExcludingVAT($productPriceHT['price'], $productPriceHT['vat'])) * $productPriceHT['quantity'], $productPriceHT['discount']);
+        $totalHT = $totalHT + discountedPrice((priceExcludingVAT($productPriceHT['price'])) * $productPriceHT['quantity'], $productPriceHT['discount']);
     }
     return $totalHT;
 }

@@ -4,7 +4,7 @@
     <img class="productPic align-self-center p-2" src="<?php echo $product['picture_url'] ?>" alt="">
     <div class="d-flex flex-column justify-content-end">
         <p><span>Poids : </span><?php echo $product['weight'] ?> gr</p>
-        <p><span>Prix HT : </span><?php echo formatPrice(priceExcludingVAT($product['price'], $product['vat'])); ?></p>
+        <p><span>Prix HT : </span><?php echo formatPrice(priceExcludingVAT($product['price'])); ?></p>
         <p<?php if ($product['discount'] != 0): ?>><span>Remise : </span><?php echo $product['discount'] ?>
             %<?php endif ?></p>
         <p <?php if ($product['discount'] > 0): ?> class="barre"<?php endif ?> >
