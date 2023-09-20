@@ -1,6 +1,6 @@
 <?php
 
-class Item extends Catalogue
+class Item
 {
     public int $id;
     public string $name;
@@ -12,16 +12,16 @@ class Item extends Catalogue
     public int $available;
     public int $discount;
 
-    public function __construct(string $name)
+    public function __construct($db, string $name)
     {
-        $item = get_product($name);
+        $item = get_product($db, $name);
         $this->id = $item['id'];
         $this->name = $name;
         $this->description = $item['description'];
         $this->weight = $item['weight'];
         $this->price = $item['price'];
-        $this->pictureUrl = $item['pictureUrl'];
-        $this->stock = $item['stock'];
+        $this->pictureUrl = $item['picture'];
+        $this->stock = $item['stock_quantity'];
         $this->available = $item['available'];
         $this->discount = $item['discount'];
     }
@@ -36,12 +36,12 @@ class Item extends Catalogue
             <div class="d-flex flex-column justify-content-end">
                 <p><span>Poids : </span><?php echo $this->weight ?> gr</p>
                 <p><span>Prix HT : </span><?php echo formatPrice(priceExcludingVAT($this->price)); ?></p>
-                <p<?php if ($product['discount'] != 0): ?>><span>Remise : </span><?php echo $product['discount'] ?>
+                <p<?php if ($this->discount != 0): ?>><span>Remise : </span><?php echo $this->discount ?>
                     %<?php endif ?></p>
-                <p <?php if ($product['discount'] > 0): ?> class="barre"<?php endif ?> >
-                    <span>Prix TTC : </span><?php echo formatPrice($product['price']); ?></p>
-                <p id="discountPrice" class="discount" <?php if ($product['discount'] != 0): ?>>
-                    <span>Prix remisé : </span><?php echo formatPrice(discountedPrice($product['price'], $product['discount'])); ?><?php endif ?>
+                <p <?php if ($this->discount > 0): ?> class="barre"<?php endif ?> >
+                    <span>Prix TTC : </span><?php echo formatPrice($this->price); ?></p>
+                <p id="discountPrice" class="discount" <?php if ($this->discount != 0): ?>>
+                    <span>Prix remisé : </span><?php echo formatPrice(discountedPrice($this->price, $this->discount)); ?><?php endif ?>
                 </p>
                 <form action="cart.php" method="get">
                     <label class="quantity" for="quantity">Quantité :</label><input name="quantity" type="number"
@@ -49,12 +49,11 @@ class Item extends Catalogue
                                                                                     value="1"><br>
                     <input type="hidden" name="nameProduct" value="<?php echo $key ?>">
                     <button name="submit" type="submit" class="bg-info add"
-                            <?php if (!$product['availability']): ?>disabled <?php endif; ?> >Ajouter au panier
+                            <?php if (!$this->available): ?>disabled <?php endif; ?> >Ajouter au panier
                     </button>
                 </form>
             </div>
         </article>
-
         <?php
     }
 }
