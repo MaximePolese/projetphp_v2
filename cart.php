@@ -2,6 +2,8 @@
 include 'templates/header.php';
 include 'services/my-functions.php';
 include 'catalog.php';
+//include 'Item.php';
+//include 'database.php';
 
 if (isset($_GET['submit'])) {
     if (!isset($cart[$_GET['nameProduct']]) || $_GET['quantity'] != $cart[$_GET['nameProduct']]['quantity']) {
