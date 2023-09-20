@@ -12,12 +12,9 @@ class Catalogue
             $item = new Item($item['id'], $item['name'], $item['description'], $item['weight'], $item['price'], $item['picture'], $item['stock_quantity'], $item['available'], $item['discount']);
             $this->products[] = $item;
         }
-
-
-        echo '<pre>';
-        var_dump($this->products);
-        echo '</pre>';
-
+//        echo '<pre>';
+//        var_dump($this->products);
+//        echo '</pre>';
     }
 
     public function getProducts(): array
