@@ -7,19 +7,23 @@ class Catalogue
 
     public function __construct($db)
     {
-        $catalogue = get_allProduct($db);
-        foreach ($catalogue as $item) {
+        $database = get_allProduct($db);
+        foreach ($database as $item) {
             $item = new Item($item['id'], $item['name'], $item['description'], $item['weight'], $item['price'], $item['picture'], $item['stock_quantity'], $item['available'], $item['discount']);
             $this->products[] = $item;
         }
-//        echo '<pre>';
-//        var_dump($this->products);
-//        echo '</pre>';
     }
 
     public function getProducts(): array
     {
         return $this->products;
+    }
+
+    function displayCatalogue(): void
+    {
+        foreach ($this->getProducts() as $item) {
+            $item->displayItem();
+        }
     }
 }
 
