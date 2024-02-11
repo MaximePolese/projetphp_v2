@@ -15,16 +15,6 @@ function discountedPrice(float $price, float $discount): float
     return $price - ($price * $discount / 100);
 }
 
-$cart = $_SESSION['cartSave'];
-
-function fillCart(array $product, int $nb): void
-{
-    global $cart;
-    $product['quantity'] = $nb;
-    $cart[$product['name']] = $product;
-    $_SESSION['cartSave'] = $cart;
-}
-
 function totalHT(array $productsPriceHT): float
 {
     $totalHT = 0;
@@ -52,9 +42,8 @@ function totalWeight(array $productsWeight): float
     return $totalWeight;
 }
 
-function calcShipment1(): float
+function calcShipment1($cart): float
 {
-    global $cart;
     if (totalWeight($cart) < 500) {
         return 500;
     } elseif (totalWeight($cart) < 2000) {
@@ -64,9 +53,8 @@ function calcShipment1(): float
     }
 }
 
-function calcShipment2(): float
+function calcShipment2($cart): float
 {
-    global $cart;
     if (totalWeight($cart) < 500) {
         return 1000;
     } elseif (totalWeight($cart) < 3000) {
@@ -76,9 +64,8 @@ function calcShipment2(): float
     }
 }
 
-function calcShipment3(): float
+function calcShipment3($cart): float
 {
-    global $cart;
     if (totalWeight($cart) < 100) {
         return 750;
     } elseif (totalWeight($cart) < 4000) {
@@ -88,19 +75,18 @@ function calcShipment3(): float
     }
 }
 
-function chooseShipment(): float|null
+function chooseShipment($cart): float|null
 {
     if (isset($_GET['shipment'])) {
         if ($_GET['shipment'] == 1) {
-            return calcShipment1();
+            return calcShipment1($cart);
         }
         if ($_GET['shipment'] == 2) {
-            return calcShipment2();
+            return calcShipment2($cart);
         }
         if ($_GET['shipment'] == 3) {
-            return calcShipment3();
+            return calcShipment3($cart);
         }
-
     }
     return null;
 }

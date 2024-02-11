@@ -2,9 +2,6 @@
 if (!isset ($_SESSION)) {
     session_start();
 }
-if (!isset($_SESSION['cartSave'])) {
-    $_SESSION['cartSave'] = [];
-}
 ?>
 <!doctype html>
 <html lang="fr">

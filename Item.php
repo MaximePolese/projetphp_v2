@@ -25,6 +25,37 @@ class Item
         $this->discount = $discount;
     }
 
+    function displayItem(): void
+    {
+        ?>
+        <article class="product d-flex justify-content-around border border-warning border-3 my-2">
+            <h2 class="productName p-2"><?php echo $this->getName() ?></h2>
+            <p class="productDescription p-2"><span>Description : </span><?php echo $this->getDescription() ?></p>
+            <img class="productPic align-self-center p-2" src="<?php echo $this->getPicture() ?>" alt="">
+            <div class="d-flex flex-column justify-content-end">
+                <p><span>Poids : </span><?php echo $this->getWeight() ?> gr</p>
+                <p><span>Prix HT : </span><?php echo formatPrice(priceExcludingVAT($this->getPrice())); ?></p>
+                <p<?php if ($this->getDiscount() != 0): ?>><span>Remise : </span><?php echo $this->getDiscount() ?>
+                    %<?php endif ?></p>
+                <p <?php if ($this->getDiscount() > 0): ?> class="barre"<?php endif ?> >
+                    <span>Prix TTC : </span><?php echo formatPrice($this->getPrice()); ?></p>
+                <p id="discountPrice" class="discount" <?php if ($this->getDiscount() != 0): ?>>
+                    <span>Prix remisé : </span><?php echo formatPrice(discountedPrice($this->getPrice(), $this->getDiscount())); ?><?php endif ?>
+                </p>
+                <form action="cart.php" method="get">
+                    <label class="quantity" for="quantity">Quantité :</label><input name="quantity" type="number"
+                                                                                    id="quantity" min="1" max="100"
+                                                                                    value="1"><br>
+                    <input type="hidden" name="nameProduct" value="<?php echo $this->getName() ?>">
+                    <button name="submitprod" type="submit" class="bg-info add"
+                            <?php if (!$this->getAvailable()): ?>disabled <?php endif; ?> >Ajouter au panier
+                    </button>
+                </form>
+            </div>
+        </article>
+        <?php
+    }
+
     public function getId(): int
     {
         return $this->id;
@@ -68,37 +99,6 @@ class Item
     public function getDiscount(): int
     {
         return $this->discount;
-    }
-
-    function displayItem(): void
-    {
-        ?>
-        <article class="product d-flex justify-content-around border border-warning border-3 my-2">
-            <h2 class="productName p-2"><?php echo $this->getName() ?></h2>
-            <p class="productDescription p-2"><span>Description : </span><?php echo $this->getDescription() ?></p>
-            <img class="productPic align-self-center p-2" src="<?php echo $this->getPicture() ?>" alt="">
-            <div class="d-flex flex-column justify-content-end">
-                <p><span>Poids : </span><?php echo $this->getWeight() ?> gr</p>
-                <p><span>Prix HT : </span><?php echo formatPrice(priceExcludingVAT($this->getPrice())); ?></p>
-                <p<?php if ($this->getDiscount() != 0): ?>><span>Remise : </span><?php echo $this->getDiscount() ?>
-                    %<?php endif ?></p>
-                <p <?php if ($this->getDiscount() > 0): ?> class="barre"<?php endif ?> >
-                    <span>Prix TTC : </span><?php echo formatPrice($this->getPrice()); ?></p>
-                <p id="discountPrice" class="discount" <?php if ($this->getDiscount() != 0): ?>>
-                    <span>Prix remisé : </span><?php echo formatPrice(discountedPrice($this->getPrice(), $this->getDiscount())); ?><?php endif ?>
-                </p>
-                <form action="cart.php" method="get">
-                    <label class="quantity" for="quantity">Quantité :</label><input name="quantity" type="number"
-                                                                                    id="quantity" min="1" max="100"
-                                                                                    value="1"><br>
-                    <input type="hidden" name="nameProduct" value="<?php echo $this->getName() ?>">
-                    <button name="submit" type="submit" class="bg-info add"
-                            <?php if (!$this->getAvailable()): ?>disabled <?php endif; ?> >Ajouter au panier
-                    </button>
-                </form>
-            </div>
-        </article>
-        <?php
     }
 }
 

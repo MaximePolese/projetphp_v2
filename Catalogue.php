@@ -1,5 +1,5 @@
 <?php
-include_once 'Item.php';
+include 'Item.php';
 
 class Catalogue
 {
