@@ -2,6 +2,13 @@
 if (!isset ($_SESSION)) {
     session_start();
 }
+
+if (!isset($_SESSION['cartSave'])) {
+    $_SESSION['cartSave'] = [];
+}
+
+var_dump($_SESSION['cartSave']);
+
 ?>
 <!doctype html>
 <html lang="fr">
@@ -43,7 +50,7 @@ if (!isset ($_SESSION)) {
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="cart.php">Mon panier</a>
+                        <a class="nav-link" href="panier.php">Mon panier</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact</a>

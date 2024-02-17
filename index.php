@@ -1,5 +1,5 @@
 <?php
-include 'templates/header.php';
+include 'header.php';
 include 'services/my-functions.php';
 ?>
     <section class="container">
@@ -7,4 +7,4 @@ include 'services/my-functions.php';
         <p class="text-center">Aller voir la page Sacs de randonnée</p>
     </section>
 
-<?php include 'templates/footer.php'; ?>
+<?php include 'footer.php'; ?>

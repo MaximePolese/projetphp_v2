@@ -19,6 +19,16 @@ class Catalogue
         return $this->products;
     }
 
+    public function getItemById($id): ?Item
+    {
+        foreach ($this->products as $item) {
+            if ($item->getId() == $id) {
+                return $item;
+            }
+        }
+        return null;
+    }
+
     function displayCatalogue(): void
     {
         foreach ($this->getProducts() as $item) {

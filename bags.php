@@ -1,5 +1,6 @@
 <?php
-include 'templates/header.php';
+global $db;
+include 'header.php';
 include 'database.php';
 include 'Catalogue.php';
 include 'services/my-functions.php';
@@ -11,4 +12,4 @@ include 'services/my-functions.php';
         $products->displayCatalogue();
         ?>
     </section>
-<?php include 'templates/footer.php'; ?>
+<?php include 'footer.php'; ?>
