@@ -1,8 +1,8 @@
 <?php
-include 'services/my-functions.php';
-include 'Catalogue.php';
-include 'Item.php';
-include 'database.php';
+include_once 'services/my-functions.php';
+include_once 'Catalogue.php';
+include_once 'Item.php';
+include_once 'database.php';
 
 
 class Cart
@@ -161,5 +161,5 @@ class Cart
 }
 
 ?>
-<?php include 'footer.php'; ?>
+
 

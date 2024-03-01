@@ -2,7 +2,6 @@
 
 class Item
 {
-    private int $id;
     private string $name;
     private string $description;
     private int $weight;
@@ -12,7 +11,7 @@ class Item
     private int $available;
     private int $discount;
 
-    public function __construct(int $id, string $name, string $description, int $weight, int $price, string $picture, int $stock_quantity, int $available, int $discount)
+    public function __construct(private int $id, string $name, string $description, int $weight, int $price, string $picture, int $stock_quantity, int $available, int $discount)
     {
         $this->id = $id;
         $this->name = $name;
