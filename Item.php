@@ -42,12 +42,10 @@ class Item
                     <span>Prix remisé : </span><?php echo formatPrice(discountedPrice($this->getPrice(), $this->getDiscount())); ?><?php endif ?>
                 </p>
                 <form action="panier.php" method="get">
-                    <label class="quantity" for="quantity">Quantité :</label><input name="quantity" type="number"
-                                                                                    id="quantity" min="1" max="100"
-                                                                                    value="1"><br>
-                    <input type="hidden" name="action" value="add">
+                    <label class="quantity" for="quantity">Quantité :</label>
+                    <input name="quantity" type="number" id="quantity" min="1" max="100" value="1"><br>
                     <input type="hidden" name="id" value="<?php echo $this->getId(); ?>">
-                    <button name="submitprod" type="submit" class="bg-info add"
+                    <button name="addProduct" type="submit" class="bg-info add"
                             <?php if (!$this->getAvailable()): ?>disabled <?php endif; ?> >Ajouter au panier
                     </button>
                 </form>
