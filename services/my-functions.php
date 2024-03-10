@@ -77,14 +77,14 @@ function calcShipment3($cart): float
 
 function chooseShipment($cart): float|null
 {
-    if (isset($_GET['shipment'])) {
-        if ($_GET['shipment'] == 1) {
+    if (isset($_SESSION['shipment'])) {
+        if ($_SESSION['shipment'] == 1) {
             return calcShipment1($cart);
         }
-        if ($_GET['shipment'] == 2) {
+        if ($_SESSION['shipment'] == 2) {
             return calcShipment2($cart);
         }
-        if ($_GET['shipment'] == 3) {
+        if ($_SESSION['shipment'] == 3) {
             return calcShipment3($cart);
         }
     }

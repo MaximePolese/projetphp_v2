@@ -1,6 +1,8 @@
 <?php
 if (!isset ($_SESSION)) {
     session_start();
+//    $new_session_id = session_create_id();
+//    session_id($new_session_id);
 }
 ?>
 <!doctype html>

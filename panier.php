@@ -10,20 +10,33 @@ include_once 'Cart.php';
     <?php
     $catalogue = new Catalogue($db);
     $panier = new Cart();
-    if (isset($_GET['addProduct'])) {
-        $itemId = $_GET['id'];
-        $quantity = $_GET['quantity'];
+
+    if (isset($_POST['addProduct'])) {
+        $itemId = $_POST['id'];
+        $quantity = $_POST['quantity'];
         $item = $catalogue->getItemById($itemId);
         if ($item) {
-            $panier->addProduct($itemId, $item->getName(), $quantity, $item->getPrice(), $item->getDiscount());
+            $panier->addProduct($item->getId(), $item->getName(), intval($quantity), $item->getPrice(), $item->getDiscount(), $item->getWeight());
         }
     }
+
     if (isset($_GET['deleteProduct'])) {
         $panier->removeProduct($_GET['productKey']);
     }
+
     if (isset($_GET['deleteAll'])) {
         $panier->removeAll();
     }
+
+    if (isset($_POST['submit'])) {
+        $_SESSION['shipment'] = intval($_POST['shipment']);
+        var_dump($_SESSION['shipment']);
+    }
+
+    if (isset($_GET['order'])) {
+        $panier->orderProducts();
+    }
+
     $panier->displayCart();
     ?>
 </section>

@@ -13,25 +13,34 @@ class Cart
         if (!isset($_SESSION['cart'])) {
             $_SESSION['cart'] = [];
         }
+        if (!isset($_SESSION['shipment'])) {
+            $_SESSION['shipment'] = 1;
+        }
     }
 
-    public function addProduct($id, $name, $quantity, $price, $discount): void
+    public function addProduct($id, $name, $quantity, $price, $discount, $weight): void
     {
         $product = array(
             'id' => $id,
             'name' => $name,
             'quantity' => $quantity,
             'price' => $price,
-            'discount' => $discount
+            'discount' => $discount,
+            'weight' => $weight
         );
 
         $productIndex = $this->findProductInCart($id);
 
         if ($productIndex !== null) {
             $_SESSION['cart'][$productIndex]['quantity'] += $quantity;
+            $this->updateProductInDb($id, $_SESSION['cart'][$productIndex]['quantity']);
         } else {
             $_SESSION['cart'][] = $product;
+            $this->addProductToDb($id, 1, $quantity);
         }
+
+        header("Location: panier.php");
+        exit;
     }
 
     private function findProductInCart($id): int|string|null
@@ -46,12 +55,51 @@ class Cart
 
     public function removeProduct($key): void
     {
+        $this->removeProductFromDb($_SESSION['cart'][$key]['id']);
         unset($_SESSION['cart'][$key]);
+        if (count($_SESSION['cart']) === 0) {
+            $_SESSION['shipment'] = 1;
+        }
     }
 
     public function removeAll(): void
     {
         $_SESSION['cart'] = [];
+        $_SESSION['shipment'] = 1;
+        $this->removeAllFromDb();
+    }
+
+    public function addProductToDb($id, $order_id, $quantity): void
+    {
+        global $db;
+        $stmt = $db->prepare('INSERT INTO order_product (products_id, orders_id, quantity) VALUES (?,?, ?)');
+        $stmt->execute([$id, $order_id, $quantity]);
+    }
+
+    public function removeProductFromDb($id): void
+    {
+        global $db;
+        $stmt = $db->prepare('DELETE FROM order_product WHERE products_id = ?');
+        $stmt->execute([$id]);
+    }
+
+    public function updateProductInDb($id, $quantity): void
+    {
+        global $db;
+        $stmt = $db->prepare('UPDATE order_product SET quantity = ? WHERE products_id = ?');
+        $stmt->execute([$quantity, $id]);
+    }
+
+    public function removeAllFromDb(): void
+    {
+        global $db;
+        $stmt = $db->prepare('DELETE FROM order_product');
+        $stmt->execute();
+    }
+
+    public function orderProducts(): void
+    {
+        $this->removeAll();
     }
 
     public function displayCart(): void
@@ -106,23 +154,21 @@ class Cart
                     <tr>
                         <td colspan="4"></td>
                         <td class="text-end" colspan="2">
-                            <form action="panier.php" method="get">
+                            <form action="panier.php" method="post">
                                 <select name="shipment" class="form-select" aria-label="Default select example">
                                     <option
-                                        <?php if (isset($_GET['shipment']) && $_GET['shipment'] == 1) echo 'selected'; ?>value="1">
+                                        <?php if ($_SESSION['shipment'] == 1) echo 'selected'; ?> value="1">
                                         Colissimo
                                     </option>
                                     <option
-                                        <?php if (isset($_GET['shipment']) && $_GET['shipment'] == 2) echo 'selected'; ?>value="2">
+                                        <?php if ($_SESSION['shipment'] == 2) echo 'selected'; ?> value="2">
                                         Fedex
                                     </option>
                                     <option
-                                        <?php if (isset($_GET['shipment']) && $_GET['shipment'] == 3) echo 'selected'; ?>value="3">
+                                        <?php if ($_SESSION['shipment'] == 3) echo 'selected' ?> value="3">
                                         UPS
                                     </option>
                                 </select>
-                                <input type="hidden" name="quantity" value="<?php echo $_GET['quantity'] ?>">
-                                <input type="hidden" name="nameProduct" value="<?php echo $_GET['nameProduct'] ?>">
                                 <button name="submit" type="submit" class="btn btn-success m-3">Valider</button>
                             </form>
                         </td>
@@ -146,11 +192,11 @@ class Cart
                 <form action="panier.php" method="get">
                     <button name="deleteAll" type="submit" class="btn btn-danger m-3">Supprimer le panier
                     </button>
+                    <button name="order" type="submit" class="btn btn-success m-3"
+                        <?php if (!count($_SESSION['cart']) > 0): ?> disabled <?php endif ?>>
+                        COMMANDER
+                    </button>
                 </form>
-                <button type="submit" class="btn btn-success m-3"
-                        <?php if (!count($_SESSION['cart']) > 0): ?>disabled <?php endif ?>>
-                    COMMANDER
-                </button>
             </div>
         </div>
         <?php
